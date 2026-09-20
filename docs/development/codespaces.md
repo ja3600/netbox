@@ -13,8 +13,10 @@ only; it does not describe a production deployment.
    the pinned Python dependencies, then first-start setup creates
    `netbox/netbox/configuration.py` if it does not already exist and applies
    database migrations.
-3. Select the **NetBox: start development server** task from
-   **Terminal > Run Task**. Open the forwarded port 8000 when prompted.
+3. The development server starts automatically when the Codespace starts.
+   Open the forwarded port 8000 when prompted. If the server was stopped,
+   select the **NetBox: start development server** task from **Terminal > Run
+   Task** to start it again.
 
 The generated configuration is ignored by git. Startup never replaces an
 existing configuration file, so local settings and secrets are preserved.
