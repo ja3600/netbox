@@ -9,9 +9,10 @@ only; it does not describe a production deployment.
 
 1. Open the NetBox repository on GitHub and select **Code > Codespaces >
    Create codespace on main** (or on your development branch).
-2. Wait for the container to finish creating. The first start installs the
-   dependencies, creates `netbox/netbox/configuration.py` if it does not
-   already exist, and applies database migrations.
+2. Wait for the container to finish creating. The container image installs
+   the pinned Python dependencies, then first-start setup creates
+   `netbox/netbox/configuration.py` if it does not already exist and applies
+   database migrations.
 3. Select the **NetBox: start development server** task from
    **Terminal > Run Task**. Open the forwarded port 8000 when prompted.
 
@@ -19,6 +20,23 @@ The generated configuration is ignored by git. Startup never replaces an
 existing configuration file, so local settings and secrets are preserved.
 PostgreSQL and Redis are provided by the `postgres` and `redis` Compose
 services. Their development-only credentials are `netbox`/`netbox`.
+
+If an existing Codespace reports `ModuleNotFoundError: No module named
+'django'`, select **Codespaces: Rebuild Container** from the Command Palette.
+The rebuild uses the repository's `.devcontainer/Dockerfile` to install the
+requirements before the workspace is opened. As a quicker recovery without a
+rebuild, run this from the repository root in the terminal:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+Then verify the environment with:
+
+```bash
+cd netbox
+python manage.py check
+```
 
 ## Keep the plugin separate from NetBox
 

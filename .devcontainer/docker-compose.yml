@@ -1,6 +1,8 @@
 services:
   netbox:
-    image: mcr.microsoft.com/devcontainers/python:1-3.12-bookworm
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
     working_dir: /workspaces/netbox
     command: sleep infinity
     volumes:
