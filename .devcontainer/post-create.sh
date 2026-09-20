@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-cd "$(dirname "$0")/../netbox"
+repo_root="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$repo_root"
 
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 
-configuration="netbox/configuration.py"
+configuration="netbox/netbox/configuration.py"
 if [[ ! -e "$configuration" ]]; then
-    cp netbox/configuration_example.py "$configuration"
-    secret_key="$(python generate_secret_key.py)"
+    cp netbox/netbox/configuration_example.py "$configuration"
+    secret_key="$(python netbox/generate_secret_key.py)"
     cat >> "$configuration" <<EOF
 
 # Codespaces development defaults. This file is ignored by git.
@@ -29,4 +30,5 @@ for _redis_config in REDIS.values():
 EOF
 fi
 
+cd netbox
 python manage.py migrate --noinput
