@@ -331,6 +331,7 @@ nav:
     - Development:
         - Introduction: 'development/index.md'
         - Getting Started: 'development/getting-started.md'
+        - Codespaces plugin development: 'development/codespaces.md'
         - Style Guide: 'development/style-guide.md'
         - Models: 'development/models.md'
         - Adding Models: 'development/adding-models.md'

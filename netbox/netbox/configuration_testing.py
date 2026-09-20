@@ -1,3 +1,5 @@
+import os
+
 ###################################################################
 #  This file serves as a base configuration for testing purposes  #
 #  only. It is not intended for production use.                   #
@@ -10,7 +12,7 @@ DATABASES = {
         'NAME': 'netbox',
         'USER': 'netbox',
         'PASSWORD': 'netbox',
-        'HOST': 'localhost',
+        'HOST': os.getenv('NETBOX_DB_HOST', 'localhost'),
         'PORT': '',
         'CONN_MAX_AGE': 300,
     }
@@ -27,7 +29,7 @@ RQ = {
 
 REDIS = {
     'tasks': {
-        'HOST': 'localhost',
+        'HOST': os.getenv('NETBOX_REDIS_HOST', 'localhost'),
         'PORT': 6379,
         'USERNAME': '',
         'PASSWORD': '',
@@ -35,7 +37,7 @@ REDIS = {
         'SSL': False,
     },
     'caching': {
-        'HOST': 'localhost',
+        'HOST': os.getenv('NETBOX_REDIS_HOST', 'localhost'),
         'PORT': 6379,
         'USERNAME': '',
         'PASSWORD': '',

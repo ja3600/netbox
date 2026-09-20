@@ -1,0 +1,49 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "NetBox: start development server",
+      "type": "shell",
+      "command": "python manage.py runserver 0.0.0.0:8000",
+      "options": {
+        "cwd": "${workspaceFolder}/netbox"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "NetBox: apply migrations",
+      "type": "shell",
+      "command": "python manage.py migrate",
+      "options": {
+        "cwd": "${workspaceFolder}/netbox"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "NetBox: run core tests",
+      "type": "shell",
+      "command": "NETBOX_CONFIGURATION=netbox.configuration_testing NETBOX_DB_HOST=postgres NETBOX_REDIS_HOST=redis python manage.py test ${input:testTarget}",
+      "options": {
+        "cwd": "${workspaceFolder}/netbox"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "NetBox: run plugin tests",
+      "type": "shell",
+      "command": "NETBOX_CONFIGURATION=netbox.configuration python manage.py test ${input:testTarget}",
+      "options": {
+        "cwd": "${workspaceFolder}/netbox"
+      },
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "testTarget",
+      "type": "promptString",
+      "description": "Django test label (for example, my_plugin.tests or netbox.tests)",
+      "default": "netbox.tests"
+    }
+  ]
+}
